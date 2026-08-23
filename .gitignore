@@ -1,0 +1,25 @@
+# Binaries
+/attest
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+/dist/
+/bin/
+
+# Test and coverage output
+*.test
+*.out
+coverage.txt
+coverage.html
+
+# Go workspace files
+go.work
+go.work.sum
+
+# OS cruft
+.DS_Store
+Thumbs.db
