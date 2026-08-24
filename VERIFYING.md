@@ -55,20 +55,31 @@ Key rotations will be announced on https://attesting.dev and recorded in this fi
 
 ### Key custody
 
-Commits in this repository are authored and signed by the GitHub account **`xtonyknucklesx`**. The public half of the signing key is published in two places, and both are part of the trust story:
+One key signs every commit here. It carries two identities:
 
-- **https://attesting.dev/signing-key.asc** — the armored public key, served as plain text.
-- **The `xtonyknucklesx` GitHub account** — which is what allows GitHub to render the green *Verified* badge on commits. A signed commit without the public key on the authoring account is still signed; it simply will not display as verified.
+```
+Tony Rossi <me@tonyrossi.dev>
+Tony Rossi <anthony.rossi1983@gmail.com>
+```
+
+Both belong to the same key — same fingerprint, same key material — so a signature under either uid is a signature from the key whose fingerprint is published above. The second uid is retained rather than removed, because commits made before the first was added carry it, and removing it would orphan their attribution.
+
+The public half is published in two places, and both are load-bearing:
+
+- **https://attesting.dev/signing-key.asc** — the armored public key, served as plain text. This is the authoritative copy.
+- **The GitHub account that authors commits** — which is what lets GitHub render the green *Verified* badge. A signed commit without the public key on the authoring account is still signed; it simply will not display as verified.
+
+**Authoring account, in transition.** Commits through the foundation of this repository were authored as `anthony.rossi1983@gmail.com` and are therefore attributed to **`xtonyknucklesx`**, which holds the key and verifies them. Work is moving to **`tony-grc`** under `me@tonyrossi.dev`. Until that account has the address verified *and* the public key uploaded, commits authored under it would sign correctly but display as unverified — so the switch of `user.email` is made only once both are in place, never before.
 
 Rotating the key means updating all three of the following, **in this order**:
 
 1. **The page** — publish the new key at https://attesting.dev/signing-key.asc and the new fingerprint on https://attesting.dev.
-2. **The GitHub account key** — add the new public key to the `xtonyknucklesx` account, so newly signed commits continue to verify.
+2. **The GitHub account key** — add the new public key to the account currently authoring commits, so newly signed commits continue to verify.
 3. **The fingerprint in this file** — record the new fingerprint and retain the superseded one, marked as superseded.
 
 The order matters. The page is the authoritative channel, so it leads; this file trails, so that it is never the only place claiming a fingerprint the page has not yet published.
 
-One operational note for whoever performs a rotation: of the GitHub credentials on this machine, only the token for `xtonyknucklesx` carries the `write:gpg_key` scope. The account used for day-to-day repository work, `tony-grc`, does not, and `gh api /user/gpg_keys` will fail with a 404 and a scope hint when run under it. This is worth knowing before a rotation rather than during one.
+Two operational notes for whoever performs a rotation. Of the GitHub credentials on this machine, only the token for `xtonyknucklesx` carries the `write:gpg_key` scope; `tony-grc` does not, and `gh api /user/gpg_keys` fails with a 404 and a scope hint when run under it. And adding a uid does **not** change the fingerprint — it is derived from the primary key material and creation time — so identity changes of that kind do not require a rotation, and must not be described as one.
 
 ---
 
