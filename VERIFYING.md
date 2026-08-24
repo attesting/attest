@@ -69,7 +69,11 @@ The public half is published in two places, and both are load-bearing:
 - **https://attesting.dev/signing-key.asc** — the armored public key, served as plain text. This is the authoritative copy.
 - **The GitHub account that authors commits** — which is what lets GitHub render the green *Verified* badge. A signed commit without the public key on the authoring account is still signed; it simply will not display as verified.
 
-**Authoring account, in transition.** Commits through the foundation of this repository were authored as `anthony.rossi1983@gmail.com` and are therefore attributed to **`xtonyknucklesx`**, which holds the key and verifies them. Work is moving to **`tony-grc`** under `me@tonyrossi.dev`. Until that account has the address verified *and* the public key uploaded, commits authored under it would sign correctly but display as unverified — so the switch of `user.email` is made only once both are in place, never before.
+**Authoring account.** Commits are authored as `me@tonyrossi.dev` and attributed to **`tony-grc`**. Earlier commits, through this repository's foundation, were authored as `anthony.rossi1983@gmail.com` and are attributed to **`xtonyknucklesx`**.
+
+Both accounts hold this key, and each has its respective address verified, so **every commit in the history verifies regardless of which era it belongs to**. That is the reason the older uid is retained on the key rather than removed: drop it, and the foundation commits stop verifying.
+
+The switch was sequenced deliberately — the address was verified on `tony-grc` and the public key uploaded there *before* `user.email` changed. Reversing that order produces commits that are correctly signed but display as unverified, which on this repository is a claim failure in public rather than a cosmetic problem.
 
 Rotating the key means updating all three of the following, **in this order**:
 
