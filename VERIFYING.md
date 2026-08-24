@@ -41,7 +41,9 @@ Commits are currently signed with the following OpenPGP key:
 2B96CD0E01A862E650A12C68D4F471A935E054FD
 ```
 
-The authoritative copy of this fingerprint is published in two places: this file, and https://attesting.dev. Both should agree. **If they disagree, trust neither and open an issue** — a fingerprint that differs across publication channels is exactly the condition this cross-publication is designed to expose.
+The authoritative copy of this fingerprint is published at https://attesting.dev, alongside the public key itself at https://attesting.dev/signing-key.asc. The copy above is reproduced here for convenience. **If the two disagree, trust the page and open an issue** — a fingerprint that differs across publication channels is exactly the condition this cross-publication is designed to expose.
+
+The direction of that reference is deliberate. This repository is private until the first public release, so a reader who can reach the page may not be able to reach this file. The page is therefore the channel that must always be reachable, and it does not depend on this document to make its claim.
 
 Verify the fingerprint of a key you have imported before relying on it:
 
@@ -50,6 +52,23 @@ gpg --fingerprint 2B96CD0E01A862E650A12C68D4F471A935E054FD
 ```
 
 Key rotations will be announced on https://attesting.dev and recorded in this file, retaining the superseded fingerprint so that historical commits remain verifiable.
+
+### Key custody
+
+Commits in this repository are authored and signed by the GitHub account **`xtonyknucklesx`**. The public half of the signing key is published in two places, and both are part of the trust story:
+
+- **https://attesting.dev/signing-key.asc** — the armored public key, served as plain text.
+- **The `xtonyknucklesx` GitHub account** — which is what allows GitHub to render the green *Verified* badge on commits. A signed commit without the public key on the authoring account is still signed; it simply will not display as verified.
+
+Rotating the key means updating all three of the following, **in this order**:
+
+1. **The page** — publish the new key at https://attesting.dev/signing-key.asc and the new fingerprint on https://attesting.dev.
+2. **The GitHub account key** — add the new public key to the `xtonyknucklesx` account, so newly signed commits continue to verify.
+3. **The fingerprint in this file** — record the new fingerprint and retain the superseded one, marked as superseded.
+
+The order matters. The page is the authoritative channel, so it leads; this file trails, so that it is never the only place claiming a fingerprint the page has not yet published.
+
+One operational note for whoever performs a rotation: of the GitHub credentials on this machine, only the token for `xtonyknucklesx` carries the `write:gpg_key` scope. The account used for day-to-day repository work, `tony-grc`, does not, and `gh api /user/gpg_keys` will fail with a 404 and a scope hint when run under it. This is worth knowing before a rotation rather than during one.
 
 ---
 
