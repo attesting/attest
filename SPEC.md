@@ -1,4 +1,4 @@
-# attest — v0.1 Engineering Specification
+# attest: v0.1 Engineering Specification
 
 **Project: attesting** · **Binary: `attest`** · **Module: `github.com/attesting/attest`** · **Site: https://attesting.dev**
 
@@ -120,7 +120,7 @@ internal/render/    markdown summary
 docs/               predicates.md, fact-classes.md, crosswalk-authoring.md, threat-model.md
 testdata/           golden files, sample facts, sample scope, demo script
 scripts/            demo.sh, genfacts
-VERIFYING.md        repo root, not docs/ — the first thing a skeptical sysadmin looks for
+VERIFYING.md        repo root, not docs/ (the first thing a skeptical sysadmin looks for)
 ```
 
 ## Demo script (acceptance)
@@ -131,19 +131,19 @@ scripts/demo.sh must run the full lifecycle on the local machine with zero exter
 
 Web anything, database, continuous scheduling, plugin RPC, Windows collector implementation, PDF rendering (markdown only; PDF pipeline exists elsewhere), FIPS-validated crypto claims (document as roadmap in threat-model.md), multi-framework crosswalks beyond the one file.
 
-## Addendum — schema future-proofing (reserve, do not build)
+## Addendum: schema future-proofing (reserve, do not build)
 
 These reflect roadmap decisions. v0.1 implements NONE of the deferred features, but the schemas must not preclude them. Anything here marked "reserve" means: define it in the schema/types/docs, validate it if present, build nothing on it.
 
-1. Fact classes. The fact schema's required "class" field takes: "observation" | "document" | "assertion". v0.1 emits only "observation" (both collectors hardcode it). Rationale for the other two, documented in docs/fact-classes.md (create as a real doc, not a stub): the roadmap maps fact classes to NIST 800-171A assessment methods — Test = observation, Examine = document (facts derived from signed policy repos), Interview = assertion (signed, dated human statements with fast freshness decay). Naming rationale: the tool attests, humans declare, machine facts observe — three words, three meanings, no overlap. The future human-statement subcommand is `attest declare`. Validation must reject unknown classes.
+1. Fact classes. The fact schema's required "class" field takes: "observation" | "document" | "assertion". v0.1 emits only "observation" (both collectors hardcode it). Rationale for the other two, documented in docs/fact-classes.md (create as a real doc, not a stub): the roadmap maps fact classes to NIST 800-171A assessment methods. Test = observation, Examine = document (facts derived from signed policy repos), Interview = assertion (signed, dated human statements with fast freshness decay). Naming rationale: the tool attests, humans declare, machine facts observe. Three words, three meanings, no overlap. The future human-statement subcommand is `attest declare`. Validation must reject unknown classes.
 
-2. source.method becomes a closed enum: "command" | "api" | "document" | "assertion". v0.1 uses only "command" (localhost) and "api" (reserved; the static collector uses "command" semantics — pick and document one).
+2. source.method becomes a closed enum: "command" | "api" | "document" | "assertion". v0.1 uses only "command" (localhost) and "api" (reserved; the static collector uses "command" semantics: pick and document one).
 
 3. Crosswalk sufficiency gains a reserved third value: "primary" | "corroborating" | "assertion". The rule schema also reserves two optional fields, parsed and validated but not evaluated in v0.1: attester_role (string) and freshness semantics noting that assertion-class facts are expected to carry shorter freshness_max_days than observations. Document in docs/crosswalk-authoring.md.
 
 4. scope.yaml consent granularity. Design the scope schema now as per-subject grants, not global allowlists: each entry names a subject (or subject pattern), the predicates authorized FOR THAT SUBJECT, and an optional consent_ref (string, e.g. an Annex or per-person authorization id). Rationale: future household/multi-party engagements require per-person opt-in; enforcement is identical either way, so pay the schema cost now. The collect gate refuses subject+predicate pairs not covered by a grant, and the refusal log names the missing grant.
 
-5. Predicate registry discipline. In docs/predicates.md, add the governance rule as normative text: a predicate may only be added alongside at least one crosswalk rule that consumes it ("no orphan predicates"). Include naming conventions (dot-namespaced domains: disk_encryption, os, firewall, mfa, network, edr, logging, policy, personnel — the last three reserved for future fact classes) and note the registry is expected to grow to roughly 150 observation predicates plus ~50 document/assertion; design the docs layout to survive that scale.
+5. Predicate registry discipline. In docs/predicates.md, add the governance rule as normative text: a predicate may only be added alongside at least one crosswalk rule that consumes it ("no orphan predicates"). Include naming conventions (dot-namespaced domains: disk_encryption, os, firewall, mfa, network, edr, logging, policy, personnel; the last three reserved for future fact classes) and note the registry is expected to grow to roughly 150 observation predicates plus ~50 document/assertion; design the docs layout to survive that scale.
 
 6. Synthetic fact generator. Add scripts/genfacts (Go, small, part of the repo, tested) that emits configurable synthetic fact sets: N hosts, per-predicate value distributions, tunable drift/staleness rates, fixed seed for reproducibility. This is test tooling for map/emit performance and correctness at fleet scale (hundreds of subjects), and demo fuel. Golden tests may consume small generated sets checked into testdata with the seed recorded.
 

@@ -4,7 +4,7 @@ A local-first compliance evidence engine: collect security posture facts inside 
 
 ## Status
 
-Pre-release and spec-first. **Not yet functional** — this repository currently contains the specification and project documentation. There is no implementation.
+Pre-release and spec-first. **Not yet functional**: this repository currently contains the specification and project documentation. There is no implementation.
 
 [SPEC.md](SPEC.md) is the authoritative v0.1 engineering specification. Read it first.
 

@@ -27,9 +27,9 @@ Registered domains:
 | `mfa` | Multi-factor authentication enforcement | Active |
 | `network` | Network configuration and exposure | Active |
 | `edr` | Endpoint detection and response agent state | Active |
-| `logging` | Audit and log configuration | Reserved — future fact classes |
-| `policy` | Documented organizational policy | Reserved — future fact classes |
-| `personnel` | Role, access, and personnel process | Reserved — future fact classes |
+| `logging` | Audit and log configuration | Reserved · future fact classes |
+| `policy` | Documented organizational policy | Reserved · future fact classes |
+| `personnel` | Role, access, and personnel process | Reserved · future fact classes |
 
 The three reserved domains are expected to carry `document` and `assertion` class facts rather than `observation` (see [fact-classes.md](fact-classes.md)). They are named now so that the namespace is not colonized by observation predicates that would have to move later.
 
@@ -43,7 +43,7 @@ Values are JSON scalars or small objects. Never blobs, never free text where an 
 
 ## Expected scale
 
-The registry is expected to reach roughly **150 observation predicates**, plus approximately **50 document and assertion predicates** as those classes come online — on the order of 200 entries total.
+The registry is expected to reach roughly **150 observation predicates**, plus approximately **50 document and assertion predicates** as those classes come online, on the order of 200 entries total.
 
 This document is therefore organized to survive that size rather than to look tidy at eight entries. Registry tables are split by domain, one section per domain, each row carrying the type and the consuming control. When a domain exceeds roughly 25 predicates it moves to its own file under `docs/predicates/<domain>.md` and this document retains the domain index and the governance rules. Do not defer that split past the point where a reader has to scroll to find a domain.
 
@@ -64,4 +64,4 @@ The eight predicates specified for v0.1. All are `observation` class. Consuming 
 
 The `screen_lock` domain is active by virtue of `screen_lock.max_timeout_seconds` and is added to the domain table when a second predicate joins it.
 
-Crosswalk rules consuming these predicates live in the v0.1 `nist-800-171.yaml` module. Controls 3.4.1 and 3.4.2 are in scope for that module but have no consuming predicate in this registry yet; predicates serving them are added under the governance rule above — rule first, then predicate.
+Crosswalk rules consuming these predicates live in the v0.1 `nist-800-171.yaml` module. Controls 3.4.1 and 3.4.2 are in scope for that module but have no consuming predicate in this registry yet; predicates serving them are added under the governance rule above: rule first, then predicate.

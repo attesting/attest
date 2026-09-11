@@ -1,6 +1,6 @@
 # Authoring crosswalk modules
 
-> **Stub — populated at milestone 4** (crosswalk load + map with findings and freshness). Headings below reflect what [SPEC.md](../SPEC.md) promises this document will cover.
+> **Stub: populated at milestone 4** (crosswalk load + map with findings and freshness). Headings below reflect what [SPEC.md](../SPEC.md) promises this document will cover.
 
 ## Module structure
 
@@ -16,7 +16,7 @@ Supported operators: `equals`, `not_equals`, `gte`, `lte`, `in`, `exists`.
 
 ### sufficiency
 
-Values: `primary` | `corroborating` | `assertion`. The third is reserved — parsed and validated, evaluated by nothing in v0.1.
+Values: `primary` | `corroborating` | `assertion`. The third is reserved: parsed and validated, evaluated by nothing in v0.1.
 
 ### attester_role
 

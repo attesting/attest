@@ -1,6 +1,6 @@
 # Threat model
 
-> **Stub — populated at milestone 6** (alongside the reproducibility and verification work). Headings below reflect what [SPEC.md](../SPEC.md) promises this document will cover.
+> **Stub: populated at milestone 6** (alongside the reproducibility and verification work). Headings below reflect what [SPEC.md](../SPEC.md) promises this document will cover.
 
 ## Trust boundaries
 

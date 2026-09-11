@@ -1,4 +1,4 @@
-# attest — build and verification targets
+# attest: build and verification targets
 #
 # Targets are declared here from the first commit so the build surface is
 # visible before it is implemented. Bodies marked TODO name the milestone that
@@ -35,14 +35,14 @@ test:
 # TODO(milestone 1): add .golangci.yml and wire this up. SPEC.md requires a
 # golangci-lint-clean tree; this target fails loudly until that is real.
 lint:
-	@echo "lint: not yet configured — golangci-lint arrives with milestone 1"
+	@echo "lint: not yet configured (golangci-lint arrives with milestone 1)"
 	@exit 1
 
 ## sbom: generate a Software Bill of Materials
 # TODO(milestone 6): generate at build time and publish with each release.
 # VERIFYING.md commits to this; see the "SBOM" section there.
 sbom:
-	@echo "sbom: milestone 6 — no dependencies and no artifact to describe yet"
+	@echo "sbom: milestone 6, no dependencies and no artifact to describe yet"
 	@exit 1
 
 ## reproducible: build twice and verify byte-identical output
