@@ -43,7 +43,7 @@ Commits are currently signed with the following OpenPGP key:
 
 The authoritative copy of this fingerprint is published at https://attesting.dev, alongside the public key itself at https://attesting.dev/signing-key.asc. The copy above is reproduced here for convenience. **If the two disagree, trust the page and open an issue**: a fingerprint that differs across publication channels is exactly the condition this cross-publication is designed to expose.
 
-The direction of that reference is deliberate. This repository is private until the first public release, so a reader who can reach the page may not be able to reach this file. The page is therefore the channel that must always be reachable, and it does not depend on this document to make its claim.
+The direction of that reference is deliberate. The page is the channel that must always be reachable, and it does not depend on this document to make its claim.
 
 Verify the fingerprint of a key you have imported before relying on it:
 
@@ -55,14 +55,7 @@ Key rotations will be announced on https://attesting.dev and recorded in this fi
 
 ### Key custody
 
-One key signs every commit here. It carries two identities:
-
-```
-Tony Rossi <me@tonyrossi.dev>
-Tony Rossi <anthony.rossi1983@gmail.com>
-```
-
-Both belong to the same key (same fingerprint, same key material), so a signature under either uid is a signature from the key whose fingerprint is published above. The second uid is retained rather than removed, because commits made before the first was added carry it, and removing it would orphan their attribution.
+One key signs every commit here. It carries two uids: the current one, `Tony Rossi <me@tonyrossi.dev>`, and an older one used for commits signed before the current uid was added. Both belong to the same key (same fingerprint, same key material), so a signature under either uid is a signature from the key whose fingerprint is published above. The older uid is retained rather than removed, because removing it would orphan the attribution of those earlier commits.
 
 The public half is published in two places, and both are load-bearing:
 
@@ -82,8 +75,6 @@ Rotating the key means updating all three of the following, **in this order**:
 3. **The fingerprint in this file**: record the new fingerprint and retain the superseded one, marked as superseded.
 
 The order matters. The page is the authoritative channel, so it leads; this file trails, so that it is never the only place claiming a fingerprint the page has not yet published.
-
-Two operational notes for whoever performs a rotation. Of the GitHub credentials on this machine, only the token for `xtonyknucklesx` carries the `write:gpg_key` scope; `tony-grc` does not, and `gh api /user/gpg_keys` fails with a 404 and a scope hint when run under it. And adding a uid does **not** change the fingerprint (it is derived from the primary key material and creation time), so identity changes of that kind do not require a rotation, and must not be described as one.
 
 ---
 

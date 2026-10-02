@@ -8,6 +8,8 @@ Pre-release and spec-first. **Not yet functional**: this repository currently co
 
 [SPEC.md](SPEC.md) is the authoritative v0.1 engineering specification. Read it first.
 
+Project site and signing key: https://attesting.dev
+
 ## Verification
 
 This project expects to be verified rather than trusted. See [VERIFYING.md](VERIFYING.md) for how to check commits today and how released binaries will be checked once they exist.
