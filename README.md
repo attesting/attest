@@ -29,6 +29,4 @@ Project site: https://attesting.dev
 
 ## License
 
-Not yet chosen. The license decision is tracked and will be made before the first public release.
-
-Until then: **all rights reserved.**
+MIT. See [LICENSE](LICENSE).
